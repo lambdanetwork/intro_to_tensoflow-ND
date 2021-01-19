@@ -35,8 +35,8 @@ def process_image(img):
     image = tf.image.resize(image, (224, 224))
     image = image/255
     return image
-
-def predict(image_path, model, top_k):
+    
+def predict(image_path, model, top_k=1):
     im = Image.open(image_path)
     image = np.asarray(im)
     processed_image = process_image(image)
@@ -45,7 +45,7 @@ def predict(image_path, model, top_k):
     probs = probs.numpy()[0]
     classes = []    
     for i in indices.numpy()[0]:
-        class_name = class_names[str(i)]
+        class_name = class_names[str(i+1)]
         classes.append(class_name)
 
     print('classes: ', classes)
